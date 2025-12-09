@@ -521,102 +521,129 @@
   // ----------------------
   // 포토카드 저장 (라운드 카드 + 테두리)
   // ----------------------
-  function downloadCard(type) {
-    const canvas = document.createElement("canvas");
-    const width = 800;
-    const height = 1150;
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext("2d");
 
-    const isYoom = type === "yoom";
-    const text = isYoom
-      ? PUBLIC_LETTERS.yoom
-      : (diniText.value.trim() || PUBLIC_LETTERS.diniDefault);
+// 둥근 사각형 그리기 헬퍼
+function drawRoundedRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
 
-    const imgSrc = isYoom ? yoomSelect.value : diniSelect.value;
-    const fileName = isYoom ? "To_Yoom_card.png" : "To_Dini_card.png";
+// 포토카드 이미지를 캔버스로 그려서 다운로드 (둥근 카드 + 테두리)
+function downloadCard(type) {
+  const canvas = document.createElement("canvas");
+  const width = 800;
+  const height = 1100; // 전체 이미지 크기
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext("2d");
 
-    const img = new Image();
-    img.crossOrigin = "anonymous";
+  const isYoom = type === "yoom";
+  const text = isYoom
+    ? PUBLIC_LETTERS.yoom
+    : (diniText.value.trim() || PUBLIC_LETTERS.diniDefault);
+  const imgSrc = isYoom ? yoomSelect.value : diniSelect.value;
+  const fileName = isYoom ? "To_Yoom_card.png" : "To_Dini_card.png";
 
-    img.onload = function () {
-      // 전체 흰색
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, width, height);
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  img.onload = function() {
+    // ===== 배경 =====
+    ctx.fillStyle = "#f5f3ff";      // 살짝 연보라 배경 (필요없으면 #ffffff)
+    ctx.fillRect(0, 0, width, height);
 
-      // ① 둥근 카드 배경
-      const cardX = 40;
-      const cardY = 40;
-      const cardW = width - 80;
-      const cardH = height - 80;
-      const radius = 40;
+    // ===== 카드(둥근 사각형) =====
+    const cardMargin = 40;
+    const cardX = cardMargin;
+    const cardY = cardMargin;
+    const cardW = width - cardMargin * 2;
+    const cardH = height - cardMargin * 2;
+    const cardRadius = 40;
 
-      ctx.fillStyle = "#ffffff";
-      drawRoundedRect(ctx, cardX, cardY, cardW, cardH, radius);
-      ctx.fill();
+    // 카드 배경
+    drawRoundedRect(ctx, cardX, cardY, cardW, cardH, cardRadius);
+    ctx.fillStyle = "#ffffff";
+    ctx.fill();
 
-      // 그림자 + 테두리
-      ctx.strokeStyle = "rgba(0,0,0,0.18)";
-      ctx.lineWidth = 4;
-      ctx.stroke();
+    // 카드 테두리
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = "#e5e7eb";
+    ctx.stroke();
 
-      // ② 사진 그리기 (비율 유지)
-      const photoMaxWidth = cardW - 60;
-      const photoMaxHeight = cardH * 0.50;
+    // ===== 카드 안 내용 영역 =====
+    const padding = 40;
+    const contentX = cardX + padding;
+    const contentY = cardY + padding;
+    const contentW = cardW - padding * 2;
+    const maxPhotoHeight = cardH * 0.5;  // 카드 높이의 절반 정도까지만 사진
 
-      let drawW = photoMaxWidth;
-      let drawH = drawW * (img.height / img.width);
+    // ==== 사진 비율 유지해서 그리기 ====
+    const imgRatio = img.width / img.height;
+    let drawWidth = contentW;
+    let drawHeight = drawWidth / imgRatio;
 
-      if (drawH > photoMaxHeight) {
-        drawH = photoMaxHeight;
-        drawW = drawH * (img.width / img.height);
-      }
+    if (drawHeight > maxPhotoHeight) {
+      drawHeight = maxPhotoHeight;
+      drawWidth = drawHeight * imgRatio;
+    }
 
-      const imgX = cardX + (cardW - drawW) / 2;
-      const imgY = cardY + 30;
+    const offsetX = contentX + (contentW - drawWidth) / 2;
+    const offsetY = contentY;
 
-      ctx.drawImage(img, imgX, imgY, drawW, drawH);
+    ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
 
-      // ③ 텍스트
-      ctx.fillStyle = "#333";
-      ctx.font = "28px system-ui";
-      const textX = cardX + 40;
-      let textY = imgY + drawH + 40;
+    // ==== 텍스트 영역 ====
+    const textAreaY = offsetY + drawHeight + 24; // 사진과 텍스트 사이 여백
+    const textAreaWidth = contentW;
 
-      const maxTextWidth = cardW - 80;
+    ctx.fillStyle = "#111827";
+    ctx.font = "26px system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+    ctx.textBaseline = "top";
 
-      const paragraphs = text.split("\n");
-      const lineHeight = 38;
+    const lines = [];
+    const rawLines = text.split(/\r?\n/);
 
-      for (let p of paragraphs) {
-        const words = p.split(" ");
-        let line = "";
-
-        for (let w of words) {
-          const test = line + w + " ";
-          if (ctx.measureText(test).width > maxTextWidth) {
-            ctx.fillText(line, textX, textY);
-            textY += lineHeight;
-            line = w + " ";
-          } else {
-            line = test;
-          }
+    rawLines.forEach(function(line) {
+      const words = line.split(" ");
+      let current = "";
+      words.forEach(function(word) {
+        const test = current ? current + " " + word : word;
+        const w = ctx.measureText(test).width;
+        if (w > textAreaWidth) {
+          if (current) lines.push(current);
+          current = word;
+        } else {
+          current = test;
         }
+      });
+      if (current) lines.push(current);
+    });
 
-        ctx.fillText(line, textX, textY);
-        textY += lineHeight;
-      }
+    let y = textAreaY;
+    const lineHeight = 34;
+    lines.forEach(function(line) {
+      ctx.fillText(line, contentX, y);
+      y += lineHeight;
+    });
 
-      // ④ 다운로드
-      const link = document.createElement("a");
-      link.download = fileName;
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    };
+    const link = document.createElement("a");
+    link.download = fileName;
+    link.href = canvas.toDataURL("image/png");
+    link.click();
 
-    img.src = imgSrc;
-  }
+    // 아이폰용 안내 메시지
+    showStatus("이미지가 열리면 길게 눌러서 '사진 저장'을 눌러줘 :)");
+  };
+  img.src = imgSrc;
+}
 
   function drawRoundedRect(ctx, x, y, w, h, r) {
     ctx.beginPath();
