@@ -472,152 +472,169 @@
     Made with ❤️ for our 2nd anniversary · GitHub Pages
   </footer>
 
-  <script>
-    (function() {
-      // GitHub에 하드코딩해서 관리할 편지 내용
-      const PUBLIC_LETTERS = {
-  yoom: "드디어 우리의 2주년 기념일이 왔어 ♡\n이번에는 어떤걸로 준비할까 생각하다가\n이런것도 색다르지 않을까? 하고 준비해봤어!\n결혼한지도 어느새 2년이라니 실감이 안난다!\n유미랑 함께한 하루하루가 꿈만 같고\n매일이 새로워 ♡\n나랑 결혼해줘서 고맙고, 이런 행복한 마음\n언제나 마음 속에 간직하고 유미와의 추억을\n앞으로도 더 많이 쌓고 다음 3주년 때는\n해외여행 셋이서 가는걸까 ♡\n♡ 사랑해 ♡",
-  diniDefault: "가끔은 서툴지만, 그래도 당신과 함께라서 행복해."
-};
+<script>
+  (function() {
+    // GitHub에 하드코딩해서 관리할 편지 내용
+    const PUBLIC_LETTERS = {
+      yoom: "드디어 우리의 2주년 기념일이 왔어 ♡\n이번에는 어떤걸로 준비할까 생각하다가\n이런것도 색다르지 않을까? 하고 준비해봤어!\n결혼한지도 어느새 2년이라니 실감이 안난다!\n유미랑 함께한 하루하루가 꿈만 같고\n매일이 새로워 ♡\n나랑 결혼해줘서 고맙고, 이런 행복한 마음\n언제나 마음 속에 간직하고 유미와의 추억을\n앞으로도 더 많이 쌓고 다음 3주년 때는\n해외여행 셋이서 가는걸까 ♡\n♡ 사랑해 ♡",
+      diniDefault: "가끔은 서툴지만, 그래도 당신과 함께라서 행복해."
+    };
 
-      const yoomPreviewText = document.getElementById("preview-text-yoom");
-      const diniPreviewText = document.getElementById("preview-text-dini");
-      const yoomImg = document.getElementById("preview-img-yoom");
-      const diniImg = document.getElementById("preview-img-dini");
-      const yoomSelect = document.getElementById("photo-select-yoom");
-      const diniSelect = document.getElementById("photo-select-dini");
+    const yoomPreviewText = document.getElementById("preview-text-yoom");
+    const diniPreviewText = document.getElementById("preview-text-dini");
+    const yoomImg = document.getElementById("preview-img-yoom");
+    const diniImg = document.getElementById("preview-img-dini");
+    const yoomSelect = document.getElementById("photo-select-yoom");
+    const diniSelect = document.getElementById("photo-select-dini");
 
-      const diniText = document.getElementById("letter-to-dini");
+    const diniText = document.getElementById("letter-to-dini");
 
-      const downloadYoomBtn = document.getElementById("download-yoom");
-      const downloadDiniBtn = document.getElementById("download-dini");
-      const statusEl = document.getElementById("save-status");
+    const downloadYoomBtn = document.getElementById("download-yoom");
+    const downloadDiniBtn = document.getElementById("download-dini");
+    const statusEl = document.getElementById("save-status");
 
-      // 초기 텍스트 세팅
-      yoomPreviewText.textContent = PUBLIC_LETTERS.yoom;
-      diniPreviewText.textContent = PUBLIC_LETTERS.diniDefault;
+    // 초기 텍스트 세팅
+    yoomPreviewText.textContent = PUBLIC_LETTERS.yoom;
+    diniPreviewText.textContent = PUBLIC_LETTERS.diniDefault;
 
-      function showStatus(message) {
-        if (!statusEl) return;
-        statusEl.textContent = message;
-        if (!message) return;
-        setTimeout(() => {
-          if (statusEl.textContent === message) {
-            statusEl.textContent = "";
-          }
-        }, 2500);
-      }
+    function showStatus(message) {
+      if (!statusEl) return;
+      statusEl.textContent = message;
+      if (!message) return;
+      setTimeout(() => {
+        if (statusEl.textContent === message) {
+          statusEl.textContent = "";
+        }
+      }, 3000);
+    }
 
-      function syncPreview() {
-        // 윰: 텍스트는 고정, 이미지만 선택 가능
-        yoomImg.src = yoomSelect.value;
+    function syncPreview() {
+      // 윰: 텍스트는 고정, 이미지만 선택 가능
+      yoomImg.src = yoomSelect.value;
 
-        // 디니: 텍스트는 입력값 또는 기본값
-        diniImg.src = diniSelect.value;
-        const text = diniText.value.trim() || PUBLIC_LETTERS.diniDefault;
-        diniPreviewText.textContent = text;
-      }
+      // 디니: 텍스트는 입력값 또는 기본값
+      diniImg.src = diniSelect.value;
+      const text = diniText.value.trim() || PUBLIC_LETTERS.diniDefault;
+      diniPreviewText.textContent = text;
+    }
 
-      // 셀렉트 변경 시 미리보기 반영
-      function setupSelect(sel) {
-        sel.addEventListener("change", function() {
-          syncPreview();
-        });
-      }
-      setupSelect(yoomSelect);
-      setupSelect(diniSelect);
+    // 셀렉트 변경 시 미리보기 반영
+    function setupSelect(sel) {
+      sel.addEventListener("change", function() {
+        syncPreview();
+      });
+    }
+    setupSelect(yoomSelect);
+    setupSelect(diniSelect);
 
-      // 디니 편지 입력 시 미리보기 반영
-      if (diniText) {
-        diniText.addEventListener("input", function() {
-          syncPreview();
-        });
-      }
+    // 디니 편지 입력 시 미리보기 반영
+    if (diniText) {
+      diniText.addEventListener("input", function() {
+        syncPreview();
+      });
+    }
 
-      // 포토카드 이미지를 캔버스로 그려서 다운로드
-      function downloadCard(type) {
-        const canvas = document.createElement("canvas");
-        const width = 800;
-        const height = 1200;
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext("2d");
+    // 포토카드 이미지를 캔버스로 그려서 다운로드 (비율 유지 + 공백 줄이기)
+    function downloadCard(type) {
+      const canvas = document.createElement("canvas");
+      const width = 800;
+      const height = 1100;        // 전체 높이 조금 줄임
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
 
-        const isYoom = type === "yoom";
-        const text = isYoom
-          ? PUBLIC_LETTERS.yoom
-          : (diniText.value.trim() || PUBLIC_LETTERS.diniDefault);
-        const imgSrc = isYoom ? yoomSelect.value : diniSelect.value;
-        const fileName = isYoom ? "To_Yoom_card.png" : "To_Dini_card.png";
+      const isYoom = type === "yoom";
+      const text = isYoom
+        ? PUBLIC_LETTERS.yoom
+        : (diniText.value.trim() || PUBLIC_LETTERS.diniDefault);
+      const imgSrc = isYoom ? yoomSelect.value : diniSelect.value;
+      const fileName = isYoom ? "To_Yoom_card.png" : "To_Dini_card.png";
 
-        const img = new Image();
-        img.crossOrigin = "anonymous";
-        img.onload = function() {
-          // 배경 흰색
-          ctx.fillStyle = "#ffffff";
-          ctx.fillRect(0, 0, width, height);
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = function() {
+        // 전체 흰 배경
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, width, height);
 
-          // 위쪽 사진
-          const imgHeight = height * 0.6;
-          ctx.drawImage(img, 0, 0, width, imgHeight);
+        // ==== 사진 비율 유지해서 그리기 ====
+        const topMargin = 40;            // 맨 위 여백
+        const maxPhotoHeight = height * 0.55; // 사진 영역 최대 높이
+        const imgRatio = img.width / img.height;
 
-          // 아래 텍스트 영역
-          const textAreaY = imgHeight + 40;
-          const textAreaWidth = width - 80;
+        let drawWidth, drawHeight;
+        // 가로를 기준으로 맞추되, 세로가 너무 길면 줄이기
+        drawWidth = width;
+        drawHeight = drawWidth / imgRatio;
+        if (drawHeight > maxPhotoHeight) {
+          drawHeight = maxPhotoHeight;
+          drawWidth = drawHeight * imgRatio;
+        }
 
-          ctx.fillStyle = "#111827";
-          ctx.font = "28px system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
-          ctx.textBaseline = "top";
+        const offsetX = (width - drawWidth) / 2;
+        const offsetY = topMargin;
 
-          // 줄바꿈 처리
-          const lines = [];
-          const rawLines = text.split(/\r?\n/);
-          rawLines.forEach(function(line) {
-            const words = line.split(" ");
-            let current = "";
-            words.forEach(function(word) {
-              const test = current ? current + " " + word : word;
-              const w = ctx.measureText(test).width;
-              if (w > textAreaWidth) {
-                if (current) lines.push(current);
-                current = word;
-              } else {
-                current = test;
-              }
-            });
-            if (current) lines.push(current);
+        ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+
+        // ==== 텍스트 영역 ====
+        const textAreaY = offsetY + drawHeight + 20; // 사진과 텍스트 사이 여백 줄이기
+        const textAreaWidth = width - 80;
+
+        ctx.fillStyle = "#111827";
+        ctx.font = "26px system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+        ctx.textBaseline = "top";
+
+        const lines = [];
+        const rawLines = text.split(/\r?\n/);
+
+        rawLines.forEach(function(line) {
+          const words = line.split(" ");
+          let current = "";
+          words.forEach(function(word) {
+            const test = current ? current + " " + word : word;
+            const w = ctx.measureText(test).width;
+            if (w > textAreaWidth) {
+              if (current) lines.push(current);
+              current = word;
+            } else {
+              current = test;
+            }
           });
-
-          let y = textAreaY;
-          const lineHeight = 40;
-          lines.forEach(function(line) {
-            ctx.fillText(line, 40, y);
-            y += lineHeight;
-          });
-
-          const link = document.createElement("a");
-          link.download = fileName;
-          link.href = canvas.toDataURL("image/png");
-          link.click();
-          showStatus("포토카드를 저장했어요. 갤러리에서 확인해보세요 :)");
-        };
-        img.src = imgSrc;
-      }
-
-      if (downloadYoomBtn) {
-        downloadYoomBtn.addEventListener("click", function() {
-          downloadCard("yoom");
+          if (current) lines.push(current);
         });
-      }
-      if (downloadDiniBtn) {
-        downloadDiniBtn.addEventListener("click", function() {
-          downloadCard("dini");
-        });
-      }
 
-      // 초기 미리보기 동기화
-      syncPreview();
-    })();
-  </script>
+        let y = textAreaY;
+        const lineHeight = 36; // 줄 간격 조금 촘촘하게
+        lines.forEach(function(line) {
+          ctx.fillText(line, 40, y);
+          y += lineHeight;
+        });
+
+        const link = document.createElement("a");
+        link.download = fileName;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+
+        // iOS에서는 새 탭/뷰어가 열리니까, 사진 저장 안내 메시지
+        showStatus("이미지가 열리면 길게 눌러서 '사진 저장'을 눌러줘 :)");
+      };
+      img.src = imgSrc;
+    }
+
+    if (downloadYoomBtn) {
+      downloadYoomBtn.addEventListener("click", function() {
+        downloadCard("yoom");
+      });
+    }
+    if (downloadDiniBtn) {
+      downloadDiniBtn.addEventListener("click", function() {
+        downloadCard("dini");
+      });
+    }
+
+    // 초기 미리보기 동기화
+    syncPreview();
+  })();
+</script>
 </body>
 </html>
