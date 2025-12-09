@@ -10,7 +10,6 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Our 2nd Anniversary" />
   <meta property="og:description" content="함께 걸어온 730일, 그리고 앞으로의 시간들" />
-  <!-- 추후 필요하면 og:image 추가 (preview.png 등) -->
 
   <style>
     * {
@@ -139,7 +138,7 @@
       padding-left: 0.6rem;
     }
 
-    /* 타임라인 */
+    /* 타임라인 스타일(텍스트 블록용으로도 재사용) */
     .timeline {
       border-left: 2px solid #e5e7eb;
       padding-left: 1rem;
@@ -170,22 +169,29 @@
     /* ===== 편지 섹션 ===== */
     .letters {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 1.7rem;
       margin-top: 1.2rem;
     }
 
     .letter-card {
       background: #ffffff;
-      border-radius: 1.2rem;
-      padding: 1.2rem 1.4rem 1.4rem;
+      border-radius: 1.4rem;
+      padding: 1.1rem 1.1rem 1.3rem;
       box-shadow: 0 8px 20px rgba(0,0,0,0.06);
       display: flex;
       flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .letter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       gap: 0.5rem;
     }
 
-    .letter-card h3 {
+    .letter-header h3 {
       margin: 0;
       font-size: 1rem;
       color: #7c3aed;
@@ -196,9 +202,45 @@
       color: #9ca3af;
     }
 
+    .letter-photo-preview {
+      background: #f9fafb;
+      border-radius: 1.1rem;
+      padding: 0.6rem;
+      box-shadow: 0 6px 16px rgba(15,23,42,0.06) inset;
+    }
+
+    .letter-photo-inner {
+      background: #ffffff;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(15,23,42,0.12);
+    }
+
+    .letter-photo-inner img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+    }
+
+    .letter-text-display {
+      padding: 0.7rem 0.8rem 0.9rem;
+      font-size: 0.85rem;
+      white-space: pre-wrap;
+      min-height: 3rem;
+    }
+
+    .photo-select {
+      font-size: 0.8rem;
+      padding: 0.3rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+    }
+
     textarea.letter-input {
       width: 100%;
-      min-height: 140px;
+      min-height: 120px;
       resize: vertical;
       border-radius: 0.75rem;
       border: 1px solid #e5e7eb;
@@ -246,6 +288,12 @@
       color: #374151;
     }
 
+    .btn-outline {
+      background: #ffffff;
+      color: #4b5563;
+      border: 1px solid #e5e7eb;
+    }
+
     .save-status {
       font-size: 0.78rem;
       color: #9ca3af;
@@ -269,7 +317,7 @@
     <div>
       <h1 class="hero-title">Happy 2nd Anniversary</h1>
       <div class="hero-date">2025.12.10</div>
-      <div class="date-badge">Since 2023.12.10 · 730 days together</div>
+      <div class="date-badge">Since 2023.12.10 · 730 days 윰♡디니</div>
       <p class="hero-subtext">
         우리가 함께 보낸 모든 계절들을 기억하며,  
         이 페이지에 오늘의 마음을 살짝 남겨두어요.
@@ -281,20 +329,20 @@
       <!-- 이미지는 images 폴더에 넣고 파일명만 맞춰주세요 -->
       <div class="photo-card">
         <img src="images/photo1.jpg" alt="우리 사진 1" />
-        <div class="photo-caption">첫 해의 우리</div>
+        <div class="photo-caption">photo 1</div>
       </div>
       <div class="photo-card">
         <img src="images/photo2.jpg" alt="우리 사진 2" />
-        <div class="photo-caption">함께한 여행 한 장면</div>
+        <div class="photo-caption">photo 2</div>
       </div>
       <div class="photo-card">
         <img src="images/photo3.jpg" alt="우리 사진 3" />
-        <div class="photo-caption">요즘의 일상 속 우리</div>
+        <div class="photo-caption">photo 3</div>
       </div>
     </div>
   </section>
 
-  <!-- 간단 타임라인 (원하면 나중에 수정/삭제 가능) -->
+  <!-- 우리의 작은 기록들 (사진 아래 문구) -->
   <section class="section">
     <h2>우리의 작은 기록들</h2>
     <div class="timeline">
@@ -304,11 +352,11 @@
       </div>
       <div class="timeline-item">
         <div class="timeline-date">2024</div>
-        <div>첫 여행, 새로운 도전, 그리고 서로를 조금 더 이해하게 된 시간들</div>
+        <div>우리가 처음 같이 살게 되며 서로의 더욱 새로운 모습과 이쁜 모습을 담아왔던 한 해</div>
       </div>
       <div class="timeline-item">
         <div class="timeline-date">2025</div>
-        <div>조금은 익숙해졌지만, 여전히 함께라서 든든한 우리의 두 번째 해</div>
+        <div>조금은 익숙해졌지만, 여전히 함께라서 든든하고 서로 의지했던 우리의 두 번째 해</div>
       </div>
       <div class="timeline-item">
         <div class="timeline-date">2025.12.10</div>
@@ -317,27 +365,85 @@
     </div>
   </section>
 
-  <!-- 서로에게 쓰는 짧은 편지 (저장 기능 포함) -->
+  <!-- 서로에게 쓰는 짧은 편지 (포토카드 + 저장 기능) -->
   <section class="section">
     <h2>서로에게 쓰는 짧은 편지</h2>
     <p style="font-size:0.9rem; color:#6b7280; margin-bottom:0.8rem;">
-      여기 적은 편지는 이 브라우저 안에만 저장돼요.  
-      둘이서 같이 앉아서 한 번씩 적어보고, 내년에도 다시 열어보면 재밌을 거예요.
+      각자의 편지를 세 장의 사진 중 하나와 함께 포토카드로 만들어둘 수 있어요.  
+      편지는 이 브라우저에 저장되고, 필요하면 PNG 이미지로 내려받아서 사진 앨범에 넣어두면 딱 좋아요.
     </p>
 
     <div class="letters">
-      <!-- 왼쪽: 당신 편지 -->
-      <div class="letter-card">
-        <h3>To You</h3>
-        <div class="letter-note">당신에게 하고 싶은 말을 짧게 남겨보세요.</div>
-        <textarea id="letter-to-you" class="letter-input" placeholder="항상 고맙고, 앞으로도 잘 부탁해 😊"></textarea>
+      <!-- 윰에게 -->
+      <div class="letter-card" id="card-yoom">
+        <div class="letter-header">
+          <h3>To 윰</h3>
+          <select id="photo-select-yoom" class="photo-select">
+            <option value="images/photo1.jpg">photo 1</option>
+            <option value="images/photo2.jpg">photo 2</option>
+            <option value="images/photo3.jpg">photo 3</option>
+          </select>
+        </div>
+        <div class="letter-note">디니가 윰에게 하고 싶은 말을 자유롭게 남겨주세요.</div>
+
+        <!-- 포토카드 미리보기 -->
+        <div class="letter-photo-preview">
+          <div class="letter-photo-inner">
+            <img id="preview-img-yoom" src="images/photo1.jpg" alt="To 윰 포토카드" />
+            <div id="preview-text-yoom" class="letter-text-display">
+              항상 고맙고, 앞으로도 잘 부탁해.
+            </div>
+          </div>
+        </div>
+
+        <!-- 실제 편지 입력 -->
+        <textarea
+          id="letter-to-yoom"
+          class="letter-input"
+          placeholder="항상 고맙고, 앞으로도 잘 부탁해 :)"
+        ></textarea>
+
+        <div class="letters-actions">
+          <button id="download-yoom" class="btn btn-outline">
+            🖼 이미지로 저장
+          </button>
+        </div>
       </div>
 
-      <!-- 오른쪽: 나의 편지 -->
-      <div class="letter-card">
-        <h3>From Me</h3>
-        <div class="letter-note">오늘의 나, 그리고 우리가 기억됐으면 하는 말들.</div>
-        <textarea id="letter-from-me" class="letter-input" placeholder="가끔은 서툴지만, 그래도 당신과 함께라서 행복해."></textarea>
+      <!-- 디니에게 -->
+      <div class="letter-card" id="card-dini">
+        <div class="letter-header">
+          <h3>To 디니</h3>
+          <select id="photo-select-dini" class="photo-select">
+            <option value="images/photo1.jpg">photo 1</option>
+            <option value="images/photo2.jpg">photo 2</option>
+            <option value="images/photo3.jpg">photo 3</option>
+          </select>
+        </div>
+        <div class="letter-note">윰이 디니에게 하고 싶은 말을 마음껏 적어주세요.</div>
+
+        <!-- 포토카드 미리보기 -->
+        <div class="letter-photo-preview">
+          <div class="letter-photo-inner">
+            <img id="preview-img-dini" src="images/photo2.jpg" alt="To 디니 포토카드" />
+            <div id="preview-text-dini" class="letter-text-display">
+              가끔은 서툴지만, 그래도 당신과 함께라서 행복해.
+            </div>
+          </div>
+        </div>
+
+        <!-- 실제 편지 입력 -->
+        <textarea
+          id="letter-to-dini"
+          class="letter-input"
+          placeholder="오늘의 마음, 솔직하게 남겨두기 :)"
+        ></textarea>
+
+        <div class="letters-actions">
+          <button id="download-dini" class="btn btn-outline">
+            🖼 이미지로 저장
+          </button>
+        </div>
       </div>
     </div>
 
@@ -358,14 +464,26 @@
 
   <script>
     (function() {
-      const KEY_TO_YOU = "anniv_letter_to_you";
-      const KEY_FROM_ME = "anniv_letter_from_me";
+      const KEY_YOOM_TEXT = "anniv_letter_yoom_text";
+      const KEY_DINI_TEXT = "anniv_letter_dini_text";
+      const KEY_YOOM_IMG = "anniv_letter_yoom_img";
+      const KEY_DINI_IMG = "anniv_letter_dini_img";
 
-      const toYou = document.getElementById("letter-to-you");
-      const fromMe = document.getElementById("letter-from-me");
+      const yoomText = document.getElementById("letter-to-yoom");
+      const diniText = document.getElementById("letter-to-dini");
+      const yoomPreviewText = document.getElementById("preview-text-yoom");
+      const diniPreviewText = document.getElementById("preview-text-dini");
+      const yoomImg = document.getElementById("preview-img-yoom");
+      const diniImg = document.getElementById("preview-img-dini");
+      const yoomSelect = document.getElementById("photo-select-yoom");
+      const diniSelect = document.getElementById("photo-select-dini");
+
       const saveBtn = document.getElementById("save-letters");
       const resetBtn = document.getElementById("reset-letters");
       const statusEl = document.getElementById("save-status");
+
+      const downloadYoomBtn = document.getElementById("download-yoom");
+      const downloadDiniBtn = document.getElementById("download-dini");
 
       function showStatus(message) {
         if (!statusEl) return;
@@ -378,13 +496,28 @@
         }, 2500);
       }
 
+      function syncPreview() {
+        yoomPreviewText.textContent = yoomText.value || "항상 고맙고, 앞으로도 잘 부탁해.";
+        diniPreviewText.textContent = diniText.value || "가끔은 서툴지만, 그래도 당신과 함께라서 행복해.";
+        yoomImg.src = yoomSelect.value;
+        diniImg.src = diniSelect.value;
+      }
+
       function loadLetters() {
         try {
-          const savedTo = localStorage.getItem(KEY_TO_YOU);
-          const savedFrom = localStorage.getItem(KEY_FROM_ME);
-          if (savedTo !== null) toYou.value = savedTo;
-          if (savedFrom !== null) fromMe.value = savedFrom;
-          if (savedTo || savedFrom) {
+          const yoomSavedText = localStorage.getItem(KEY_YOOM_TEXT);
+          const diniSavedText = localStorage.getItem(KEY_DINI_TEXT);
+          const yoomSavedImg = localStorage.getItem(KEY_YOOM_IMG);
+          const diniSavedImg = localStorage.getItem(KEY_DINI_IMG);
+
+          if (yoomSavedText !== null) yoomText.value = yoomSavedText;
+          if (diniSavedText !== null) diniText.value = diniSavedText;
+          if (yoomSavedImg !== null) yoomSelect.value = yoomSavedImg;
+          if (diniSavedImg !== null) diniSelect.value = diniSavedImg;
+
+          syncPreview();
+
+          if (yoomSavedText || diniSavedText || yoomSavedImg || diniSavedImg) {
             showStatus("이전에 저장된 편지를 불러왔어요.");
           }
         } catch (e) {
@@ -394,8 +527,10 @@
 
       function saveLetters() {
         try {
-          localStorage.setItem(KEY_TO_YOU, toYou.value || "");
-          localStorage.setItem(KEY_FROM_ME, fromMe.value || "");
+          localStorage.setItem(KEY_YOOM_TEXT, yoomText.value || "");
+          localStorage.setItem(KEY_DINI_TEXT, diniText.value || "");
+          localStorage.setItem(KEY_YOOM_IMG, yoomSelect.value || "");
+          localStorage.setItem(KEY_DINI_IMG, diniSelect.value || "");
           const now = new Date();
           const timeText =
             now.getHours().toString().padStart(2, "0") +
@@ -413,41 +548,129 @@
           return;
         }
         try {
-          localStorage.removeItem(KEY_TO_YOU);
-          localStorage.removeItem(KEY_FROM_ME);
+          localStorage.removeItem(KEY_YOOM_TEXT);
+          localStorage.removeItem(KEY_DINI_TEXT);
+          localStorage.removeItem(KEY_YOOM_IMG);
+          localStorage.removeItem(KEY_DINI_IMG);
         } catch (e) {
           console.warn("편지 삭제 중 오류:", e);
         }
-        toYou.value = "";
-        fromMe.value = "";
+        yoomText.value = "";
+        diniText.value = "";
+        yoomSelect.value = "images/photo1.jpg";
+        diniSelect.value = "images/photo2.jpg";
+        syncPreview();
         showStatus("편지를 모두 비웠어요.");
       }
 
-      // 이벤트 연결
-      if (saveBtn) {
-        saveBtn.addEventListener("click", saveLetters);
-      }
-      if (resetBtn) {
-        resetBtn.addEventListener("click", resetLetters);
-      }
-
-      // 입력 중에도 자동 저장(부담안가게 조금 딜레이)
+      // 텍스트/사진 선택 시 미리보기 & 자동 저장
       let typingTimer;
       const AUTO_SAVE_DELAY = 1000;
 
-      function setupAutoSave(el) {
+      function setupAutoSaveForInput(el) {
         el.addEventListener("input", function() {
           clearTimeout(typingTimer);
+          syncPreview();
           typingTimer = setTimeout(() => {
             saveLetters();
           }, AUTO_SAVE_DELAY);
         });
       }
 
-      setupAutoSave(toYou);
-      setupAutoSave(fromMe);
+      function setupAutoSaveForSelect(sel) {
+        sel.addEventListener("change", function() {
+          syncPreview();
+          saveLetters();
+        });
+      }
 
-      // 최초 로드 시 저장된 내용 불러오기
+      if (saveBtn) saveBtn.addEventListener("click", saveLetters);
+      if (resetBtn) resetBtn.addEventListener("click", resetLetters);
+
+      setupAutoSaveForInput(yoomText);
+      setupAutoSaveForInput(diniText);
+      setupAutoSaveForSelect(yoomSelect);
+      setupAutoSaveForSelect(diniSelect);
+
+      // 포토카드 이미지를 캔버스로 그려서 다운로드
+      function downloadCard(type) {
+        const isYoom = type === "yoom";
+        const text = isYoom ? yoomText.value || yoomPreviewText.textContent : diniText.value || diniPreviewText.textContent;
+        const imgSrc = isYoom ? yoomSelect.value : diniSelect.value;
+        const fileName = isYoom ? "To_Yoom_card.png" : "To_Dini_card.png";
+
+        const canvas = document.createElement("canvas");
+        const width = 800;
+        const height = 1200;
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.onload = function() {
+          // 배경 흰색
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, width, height);
+
+          // 위쪽에 사진
+          const imgHeight = height * 0.6;
+          ctx.drawImage(img, 0, 0, width, imgHeight);
+
+          // 아래 텍스트 영역
+          const textAreaY = imgHeight + 40;
+          const textAreaWidth = width - 80;
+
+          ctx.fillStyle = "#111827";
+          ctx.font = "28px system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+          ctx.textBaseline = "top";
+
+          // 줄바꿈 처리
+          const lines = [];
+          const rawLines = text.split(/\r?\n/);
+          rawLines.forEach(function(line) {
+            const words = line.split(" ");
+            let current = "";
+            words.forEach(function(word) {
+              const test = current ? current + " " + word : word;
+              const w = ctx.measureText(test).width;
+              if (w > textAreaWidth) {
+                if (current) lines.push(current);
+                current = word;
+              } else {
+                current = test;
+              }
+            });
+            if (current) lines.push(current);
+          });
+
+          let y = textAreaY;
+          const lineHeight = 40;
+          lines.forEach(function(line) {
+            ctx.fillText(line, 40, y);
+            y += lineHeight;
+          });
+
+          const link = document.createElement("a");
+          link.download = fileName;
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+        };
+        img.src = imgSrc;
+      }
+
+      if (downloadYoomBtn) {
+        downloadYoomBtn.addEventListener("click", function() {
+          downloadCard("yoom");
+        });
+      }
+      if (downloadDiniBtn) {
+        downloadDiniBtn.addEventListener("click", function() {
+          downloadCard("dini");
+        });
+      }
+
+      // 최초 로드 시
       loadLetters();
     })();
   </script>
