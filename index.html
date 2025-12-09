@@ -26,13 +26,12 @@
 
     /* ===== HERO ===== */
     .hero {
-      /* min-height: 80vh;  삭제 */
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 2rem 1.5rem 2.5rem; /* 여백 줄임 */
+      padding: 2rem 1.5rem 2.5rem;
       background: radial-gradient(circle at top, #fdf2ff, #faf5ff);
     }
 
@@ -138,7 +137,7 @@
       padding-left: 0.6rem;
     }
 
-    /* 타임라인 스타일(텍스트 블록용으로도 재사용) */
+    /* 타임라인 스타일 */
     .timeline {
       border-left: 2px solid #e5e7eb;
       padding-left: 1rem;
@@ -238,26 +237,6 @@
       background: #ffffff;
     }
 
-    textarea.letter-input {
-      width: 100%;
-      min-height: 120px;
-      resize: vertical;
-      border-radius: 0.75rem;
-      border: 1px solid #e5e7eb;
-      padding: 0.7rem 0.8rem;
-      font-family: inherit;
-      font-size: 0.9rem;
-      line-height: 1.5;
-      outline: none;
-      background: #f9fafb;
-    }
-
-    textarea.letter-input:focus {
-      border-color: #c084fc;
-      background: #ffffff;
-      box-shadow: 0 0 0 1px rgba(192, 132, 252, 0.5);
-    }
-
     .letters-actions {
       display: flex;
       flex-wrap: wrap;
@@ -301,6 +280,43 @@
       text-align: right;
     }
 
+    /* 비밀번호 박스 */
+    .password-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+      margin-top: 0.6rem;
+    }
+
+    .password-input {
+      flex: 1 1 180px;
+      min-width: 0;
+      padding: 0.4rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      font-size: 0.9rem;
+      outline: none;
+      background: #ffffff;
+    }
+
+    .password-input:focus {
+      border-color: #c084fc;
+      box-shadow: 0 0 0 1px rgba(192,132,252,0.35);
+    }
+
+    .locked-message {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 0.4rem;
+    }
+
+    .locked {
+      filter: blur(4px);
+      pointer-events: none;
+      user-select: none;
+    }
+
     /* ===== 푸터 ===== */
     footer {
       text-align: center;
@@ -331,16 +347,13 @@
       }
       .hero-photos {
         margin-top: 1rem;
+        flex-wrap: nowrap;        /* 한 줄에 고정 */
+        justify-content: center;
+        gap: 0.4rem;
       }
       .photo-card {
-        width: 115px;
-        max-width: 28vw;
-      }
-      /* 기울기 제거해서 세로 공간 확보 */
-      .photo-card:nth-child(1),
-      .photo-card:nth-child(2),
-      .photo-card:nth-child(3) {
-        transform: none;
+        width: 32vw;
+        max-width: none;
       }
     }
   </style>
@@ -376,7 +389,7 @@
     </div>
   </section>
 
-  <!-- 우리의 작은 기록들 (사진 아래 문구) -->
+  <!-- 우리의 작은 기록들 -->
   <section class="section">
     <h2>우리의 작은 기록들</h2>
     <div class="timeline">
@@ -399,15 +412,30 @@
     </div>
   </section>
 
-  <!-- 서로에게 쓰는 짧은 편지 (포토카드 + 저장 기능) -->
+  <!-- 서로에게 쓰는 짧은 편지 (비밀번호로 열기) -->
   <section class="section">
     <h2>서로에게 쓰는 짧은 편지</h2>
-    <p style="font-size:0.9rem; color:#6b7280; margin-bottom:0.8rem;">
-      각자의 편지를 세 장의 사진 중 하나와 함께 포토카드로 만들어둘 수 있어요.  
-      편지는 이 브라우저에 저장되고, 필요하면 PNG 이미지로 내려받아서 사진 앨범에 넣어두면 딱 좋아요.
+    <p style="font-size:0.9rem; color:#6b7280; margin-bottom:0.4rem;">
+      이 아래 편지는 GitHub에 함께 저장돼 있어서, 링크를 아는 사람이라면 어디서든 볼 수 있어요.  
+      다만 비밀번호를 입력해야 내용이 보이도록 살짝 잠가두었어요.
     </p>
 
-    <div class="letters">
+    <div class="password-box">
+      <input
+        type="password"
+        id="letter-password"
+        class="password-input"
+        placeholder="비밀번호를 입력하세요"
+      />
+      <button id="unlock-letters" class="btn btn-primary">
+        🔓 편지 열기
+      </button>
+    </div>
+    <div id="lock-message" class="locked-message">
+      비밀번호를 입력하면 윰과 디니의 편지가 열려요. (힌트: eumdi + 날짜)
+    </div>
+
+    <div id="letters-wrapper" class="letters locked">
       <!-- 윰에게 -->
       <div class="letter-card" id="card-yoom">
         <div class="letter-header">
@@ -418,7 +446,7 @@
             <option value="우리 사진 3.PNG">우리 사진 3</option>
           </select>
         </div>
-        <div class="letter-note">디니가 윰에게 하고 싶은 말을 자유롭게 남겨주세요.</div>
+        <div class="letter-note">디니가 윰에게 남긴 오늘의 편지입니다.</div>
 
         <!-- 포토카드 미리보기 -->
         <div class="letter-photo-preview">
@@ -429,13 +457,6 @@
             </div>
           </div>
         </div>
-
-        <!-- 실제 편지 입력 -->
-        <textarea
-          id="letter-to-yoom"
-          class="letter-input"
-          placeholder="항상 고맙고, 앞으로도 잘 부탁해 :)"
-        ></textarea>
 
         <div class="letters-actions">
           <button id="download-yoom" class="btn btn-outline">
@@ -454,7 +475,7 @@
             <option value="우리 사진 3.PNG">우리 사진 3</option>
           </select>
         </div>
-        <div class="letter-note">윰이 디니에게 하고 싶은 말을 마음껏 적어주세요.</div>
+        <div class="letter-note">윰이 디니에게 남긴 오늘의 편지입니다.</div>
 
         <!-- 포토카드 미리보기 -->
         <div class="letter-photo-preview">
@@ -466,13 +487,6 @@
           </div>
         </div>
 
-        <!-- 실제 편지 입력 -->
-        <textarea
-          id="letter-to-dini"
-          class="letter-input"
-          placeholder="오늘의 마음, 솔직하게 남겨두기 :)"
-        ></textarea>
-
         <div class="letters-actions">
           <button id="download-dini" class="btn btn-outline">
             🖼 이미지로 저장
@@ -481,14 +495,6 @@
       </div>
     </div>
 
-    <div class="letters-actions">
-      <button id="save-letters" class="btn btn-primary">
-        💾 편지 저장하기
-      </button>
-      <button id="reset-letters" class="btn btn-secondary">
-        ♻ 편지 비우기
-      </button>
-    </div>
     <div id="save-status" class="save-status"></div>
   </section>
 
@@ -498,13 +504,14 @@
 
   <script>
     (function() {
-      const KEY_YOOM_TEXT = "anniv_letter_yoom_text";
-      const KEY_DINI_TEXT = "anniv_letter_dini_text";
-      const KEY_YOOM_IMG = "anniv_letter_yoom_img";
-      const KEY_DINI_IMG = "anniv_letter_dini_img";
+      const PASSWORD = "eumdi0324";
 
-      const yoomText = document.getElementById("letter-to-yoom");
-      const diniText = document.getElementById("letter-to-dini");
+      // 편지 내용(공용, GitHub에 저장되는 부분)
+      const PUBLIC_LETTERS = {
+        yoom: "항상 고맙고, 앞으로도 잘 부탁해.",
+        dini: "가끔은 서툴지만, 그래도 당신과 함께라서 행복해."
+      };
+
       const yoomPreviewText = document.getElementById("preview-text-yoom");
       const diniPreviewText = document.getElementById("preview-text-dini");
       const yoomImg = document.getElementById("preview-img-yoom");
@@ -512,12 +519,18 @@
       const yoomSelect = document.getElementById("photo-select-yoom");
       const diniSelect = document.getElementById("photo-select-dini");
 
-      const saveBtn = document.getElementById("save-letters");
-      const resetBtn = document.getElementById("reset-letters");
-      const statusEl = document.getElementById("save-status");
-
       const downloadYoomBtn = document.getElementById("download-yoom");
       const downloadDiniBtn = document.getElementById("download-dini");
+
+      const lettersWrapper = document.getElementById("letters-wrapper");
+      const pwdInput = document.getElementById("letter-password");
+      const unlockBtn = document.getElementById("unlock-letters");
+      const lockMessage = document.getElementById("lock-message");
+      const statusEl = document.getElementById("save-status");
+
+      // 초기 표시
+      yoomPreviewText.textContent = PUBLIC_LETTERS.yoom;
+      diniPreviewText.textContent = PUBLIC_LETTERS.dini;
 
       function showStatus(message) {
         if (!statusEl) return;
@@ -531,105 +544,49 @@
       }
 
       function syncPreview() {
-        yoomPreviewText.textContent = yoomText.value || "항상 고맙고, 앞으로도 잘 부탁해.";
-        diniPreviewText.textContent = diniText.value || "가끔은 서툴지만, 그래도 당신과 함께라서 행복해.";
         yoomImg.src = yoomSelect.value;
         diniImg.src = diniSelect.value;
       }
 
-      function loadLetters() {
-        try {
-          const yoomSavedText = localStorage.getItem(KEY_YOOM_TEXT);
-          const diniSavedText = localStorage.getItem(KEY_DINI_TEXT);
-          const yoomSavedImg = localStorage.getItem(KEY_YOOM_IMG);
-          const diniSavedImg = localStorage.getItem(KEY_DINI_IMG);
+      function unlockLetters() {
+        const input = pwdInput.value.trim();
+        if (input === PASSWORD) {
+          lettersWrapper.classList.remove("locked");
+          lettersWrapper.style.filter = "none";
+          lettersWrapper.style.pointerEvents = "auto";
+          lockMessage.textContent = "잠금이 해제되었어요. 우리 둘의 편지를 함께 읽어봐요 💌";
+          showStatus("편지를 열었어요.");
+        } else {
+          lockMessage.textContent = "비밀번호가 달라요. 다시 한 번 확인해볼까요?";
+          showStatus("비밀번호가 올바르지 않습니다.");
+        }
+      }
 
-          if (yoomSavedText !== null) yoomText.value = yoomSavedText;
-          if (diniSavedText !== null) diniText.value = diniSavedText;
-          if (yoomSavedImg !== null) yoomSelect.value = yoomSavedImg;
-          if (diniSavedImg !== null) diniSelect.value = diniSavedImg;
-
-          syncPreview();
-
-          if (yoomSavedText || diniSavedText || yoomSavedImg || diniSavedImg) {
-            showStatus("이전에 저장된 편지를 불러왔어요.");
+      if (unlockBtn) {
+        unlockBtn.addEventListener("click", unlockLetters);
+      }
+      if (pwdInput) {
+        pwdInput.addEventListener("keydown", function(e) {
+          if (e.key === "Enter") {
+            unlockLetters();
           }
-        } catch (e) {
-          console.warn("편지 로드 중 오류:", e);
-        }
-      }
-
-      function saveLetters() {
-        try {
-          localStorage.setItem(KEY_YOOM_TEXT, yoomText.value || "");
-          localStorage.setItem(KEY_DINI_TEXT, diniText.value || "");
-          localStorage.setItem(KEY_YOOM_IMG, yoomSelect.value || "");
-          localStorage.setItem(KEY_DINI_IMG, diniSelect.value || "");
-          const now = new Date();
-          const timeText =
-            now.getHours().toString().padStart(2, "0") +
-            ":" +
-            now.getMinutes().toString().padStart(2, "0");
-          showStatus("편지를 저장했어요. (" + timeText + ")");
-        } catch (e) {
-          console.warn("편지 저장 중 오류:", e);
-          showStatus("저장에 문제가 생겼어요. (브라우저 설정을 확인해 주세요)");
-        }
-      }
-
-      function resetLetters() {
-        if (!confirm("정말 편지를 모두 비울까요? (이 브라우저에서만 삭제돼요)")) {
-          return;
-        }
-        try {
-          localStorage.removeItem(KEY_YOOM_TEXT);
-          localStorage.removeItem(KEY_DINI_TEXT);
-          localStorage.removeItem(KEY_YOOM_IMG);
-          localStorage.removeItem(KEY_DINI_IMG);
-        } catch (e) {
-          console.warn("편지 삭제 중 오류:", e);
-        }
-        yoomText.value = "";
-        diniText.value = "";
-        yoomSelect.value = "우리 사진 1.PNG";
-        diniSelect.value = "우리 사진 2.PNG";
-        syncPreview();
-        showStatus("편지를 모두 비웠어요.");
-      }
-
-      // 텍스트/사진 선택 시 미리보기 & 자동 저장
-      let typingTimer;
-      const AUTO_SAVE_DELAY = 1000;
-
-      function setupAutoSaveForInput(el) {
-        el.addEventListener("input", function() {
-          clearTimeout(typingTimer);
-          syncPreview();
-          typingTimer = setTimeout(() => {
-            saveLetters();
-          }, AUTO_SAVE_DELAY);
         });
       }
 
-      function setupAutoSaveForSelect(sel) {
+      // 사진 선택 변경 시 미리보기 업데이트
+      function setupSelect(sel) {
         sel.addEventListener("change", function() {
           syncPreview();
-          saveLetters();
         });
       }
-
-      if (saveBtn) saveBtn.addEventListener("click", saveLetters);
-      if (resetBtn) resetBtn.addEventListener("click", resetLetters);
-
-      setupAutoSaveForInput(yoomText);
-      setupAutoSaveForInput(diniText);
-      setupAutoSaveForSelect(yoomSelect);
-      setupAutoSaveForSelect(diniSelect);
+      setupSelect(yoomSelect);
+      setupSelect(diniSelect);
+      syncPreview();
 
       // 포토카드 이미지를 캔버스로 그려서 다운로드
       function downloadCard(type) {
         const isYoom = type === "yoom";
-        const text = isYoom ? yoomText.value || yoomPreviewText.textContent : diniText.value || diniPreviewText.textContent;
+        const text = isYoom ? PUBLIC_LETTERS.yoom : PUBLIC_LETTERS.dini;
         const imgSrc = isYoom ? yoomSelect.value : diniSelect.value;
         const fileName = isYoom ? "To_Yoom_card.png" : "To_Dini_card.png";
 
@@ -643,15 +600,12 @@
         const img = new Image();
         img.crossOrigin = "anonymous";
         img.onload = function() {
-          // 배경 흰색
           ctx.fillStyle = "#ffffff";
           ctx.fillRect(0, 0, width, height);
 
-          // 위쪽에 사진
           const imgHeight = height * 0.6;
           ctx.drawImage(img, 0, 0, width, imgHeight);
 
-          // 아래 텍스트 영역
           const textAreaY = imgHeight + 40;
           const textAreaWidth = width - 80;
 
@@ -659,7 +613,6 @@
           ctx.font = "28px system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
           ctx.textBaseline = "top";
 
-          // 줄바꿈 처리
           const lines = [];
           const rawLines = text.split(/\r?\n/);
           rawLines.forEach(function(line) {
@@ -703,9 +656,6 @@
           downloadCard("dini");
         });
       }
-
-      // 최초 로드 시
-      loadLetters();
     })();
   </script>
 </body>
