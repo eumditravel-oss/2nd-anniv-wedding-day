@@ -276,12 +276,6 @@
       gap: 0.35rem;
     }
 
-    .btn-primary {
-      background: #8b5cf6;
-      color: #ffffff;
-      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.45);
-    }
-
     .btn-outline {
       background: #ffffff;
       color: #4b5563;
@@ -325,7 +319,7 @@
       }
       .hero-photos {
         margin-top: 1rem;
-        flex-wrap: nowrap;        /* 한 줄에 고정 */
+        flex-wrap: nowrap;
         justify-content: center;
         gap: 0.4rem;
       }
@@ -341,7 +335,7 @@
   <!-- 메인 히어로 -->
   <section class="hero">
     <div>
-      <h1 class="hero-title">Happy 2nd Anniv</h1>
+      <h1 class="hero-title">Happy 2nd Anniversary</h1>
       <div class="hero-date">2025.12.10</div>
       <div class="date-badge">Since 2023.12.10 · 730 days 윰♡디니</div>
       <p class="hero-subtext">
@@ -353,16 +347,16 @@
     <!-- 사진 3장 카드 레이아웃 -->
     <div class="hero-photos">
       <div class="photo-card">
-        <img src="우리 사진 1.PNG" alt="우리 사진 1" />
-        <div class="photo-caption">우리 사진 1</div>
+        <img src="우리 사진 1.PNG" alt="우리 결혼" />
+        <div class="photo-caption">우리 결혼</div>
       </div>
       <div class="photo-card">
-        <img src="우리 사진 2.PNG" alt="우리 사진 2" />
-        <div class="photo-caption">우리 사진 2</div>
+        <img src="우리 사진 2.PNG" alt="우리의 1주년" />
+        <div class="photo-caption">우리의 1주년</div>
       </div>
       <div class="photo-card">
-        <img src="우리 사진 3.PNG" alt="우리 사진 3" />
-        <div class="photo-caption">우리 사진 3</div>
+        <img src="우리 사진 3.PNG" alt="이번 2주년" />
+        <div class="photo-caption">이번 2주년</div>
       </div>
     </div>
   </section>
@@ -404,9 +398,9 @@
         <div class="letter-header">
           <h3>To 윰</h3>
           <select id="photo-select-yoom" class="photo-select">
-            <option value="우리 사진 1.PNG">우리 사진 1</option>
-            <option value="우리 사진 2.PNG">우리 사진 2</option>
-            <option value="우리 사진 3.PNG">우리 사진 3</option>
+            <option value="우리 사진 1.PNG">우리 결혼</option>
+            <option value="우리 사진 2.PNG">우리의 1주년</option>
+            <option value="우리 사진 3.PNG">이번 2주년</option>
           </select>
         </div>
         <div class="letter-note">편지 내용은 GitHub에서 직접 수정하고, 여기서는 사진만 골라 포토카드로 저장해요.</div>
@@ -414,7 +408,7 @@
         <!-- 포토카드 미리보기 -->
         <div class="letter-photo-preview">
           <div class="letter-photo-inner">
-            <img id="preview-img-yoom" src="우리 사진 1.PNG" alt="To 윰 포토카드" />
+            <img id="preview-img-yoom" src="우리 사진 1.PNG" alt="To 윰 포토카드 - 우리 결혼" />
             <div id="preview-text-yoom" class="letter-text-display">
               항상 고맙고, 앞으로도 잘 부탁해.
             </div>
@@ -433,9 +427,9 @@
         <div class="letter-header">
           <h3>To 디니</h3>
           <select id="photo-select-dini" class="photo-select">
-            <option value="우리 사진 1.PNG">우리 사진 1</option>
-            <option value="우리 사진 2.PNG">우리 사진 2</option>
-            <option value="우리 사진 3.PNG">우리 사진 3</option>
+            <option value="우리 사진 1.PNG">우리 결혼</option>
+            <option value="우리 사진 2.PNG">우리의 1주년</option>
+            <option value="우리 사진 3.PNG">이번 2주년</option>
           </select>
         </div>
         <div class="letter-note">여기에서 오늘의 마음을 자유롭게 적고, 포토카드로 남겨두어요.</div>
@@ -443,7 +437,7 @@
         <!-- 포토카드 미리보기 -->
         <div class="letter-photo-preview">
           <div class="letter-photo-inner">
-            <img id="preview-img-dini" src="우리 사진 2.PNG" alt="To 디니 포토카드" />
+            <img id="preview-img-dini" src="우리 사진 2.PNG" alt="To 디니 포토카드 - 우리의 1주년" />
             <div id="preview-text-dini" class="letter-text-display">
               가끔은 서툴지만, 그래도 당신과 함께라서 행복해.
             </div>
@@ -472,198 +466,200 @@
     Made with ❤️ for our 2nd anniversary · GitHub Pages
   </footer>
 
-<script>
-(function () {
-  const PUBLIC_LETTERS = {
-    yoom: "드디어 우리의 2주년 기념일이 왔어 ♡\n이번에는 어떤걸로 준비할까 생각하다가\n이런것도 색다르지 않을까? 하고 준비해봤어!\n결혼한지도 어느새 2년이라니 실감이 안난다!\n유미랑 함께한 하루하루가 꿈만 같고\n매일이 새로워 ♡\n나랑 결혼해줘서 고맙고, 이런 행복한 마음\n언제나 마음 속에 간직하고 유미와의 추억을\n앞으로도 더 많이 쌓고 다음 3주년 때는\n해외여행 셋이서 가는걸까 ♡\n♡ 사랑해 ♡",
-    diniDefault: "가끔은 서툴지만, 그래도 당신과 함께라서 행복해."
-  };
+  <script>
+    (function() {
+      // GitHub에 하드코딩해서 관리할 편지 내용
+      const PUBLIC_LETTERS = {
+        yoom: "드디어 우리의 2주년 기념일이 왔어 ♡\n이번에는 어떤걸로 준비할까 생각하다가\n이런것도 색다르지 않을까? 하고 준비해봤어!\n결혼한지도 어느새 2년이라니 실감이 안난다!\n유미랑 함께한 하루하루가 꿈만 같고\n매일이 새로워 ♡\n나랑 결혼해줘서 고맙고, 이런 행복한 마음\n언제나 마음 속에 간직하고 유미와의 추억을\n앞으로도 더 많이 쌓고 다음 3주년 때는\n해외여행 셋이서 가는걸까 ♡\n♡ 사랑해 ♡",
+        diniDefault: "가끔은 서툴지만, 그래도 당신과 함께라서 행복해."
+      };
 
-  const yoomSelect = document.getElementById("photo-select-yoom");
-  const diniSelect = document.getElementById("photo-select-dini");
+      const yoomPreviewText = document.getElementById("preview-text-yoom");
+      const diniPreviewText = document.getElementById("preview-text-dini");
+      const yoomImg = document.getElementById("preview-img-yoom");
+      const diniImg = document.getElementById("preview-img-dini");
+      const yoomSelect = document.getElementById("photo-select-yoom");
+      const diniSelect = document.getElementById("photo-select-dini");
 
-  const yoomImg = document.getElementById("preview-img-yoom");
-  const diniImg = document.getElementById("preview-img-dini");
+      const diniText = document.getElementById("letter-to-dini");
 
-  const yoomPreviewText = document.getElementById("preview-text-yoom");
-  const diniPreviewText = document.getElementById("preview-text-dini");
+      const downloadYoomBtn = document.getElementById("download-yoom");
+      const downloadDiniBtn = document.getElementById("download-dini");
+      const statusEl = document.getElementById("save-status");
 
-  const diniText = document.getElementById("letter-to-dini");
+      // 초기 텍스트 세팅
+      yoomPreviewText.textContent = PUBLIC_LETTERS.yoom;
+      diniPreviewText.textContent = PUBLIC_LETTERS.diniDefault;
 
-  const downloadYoomBtn = document.getElementById("download-yoom");
-  const downloadDiniBtn = document.getElementById("download-dini");
+      function showStatus(message) {
+        if (!statusEl) return;
+        statusEl.textContent = message;
+        if (!message) return;
+        setTimeout(() => {
+          if (statusEl.textContent === message) {
+            statusEl.textContent = "";
+          }
+        }, 3000);
+      }
 
-  // ----------------------
-  // 기본값 설정
-  // ----------------------
-  yoomSelect.value = "우리 사진 3.PNG";   // To 윰 기본값 3번 사진
-  diniSelect.value = "우리 사진 2.PNG";   // To 디니 기본값 그대로
+      function syncPreview() {
+        // 윰: 텍스트는 고정, 이미지만 선택 가능
+        yoomImg.src = yoomSelect.value;
 
-  yoomImg.src = yoomSelect.value;
-  diniImg.src = diniSelect.value;
+        // 디니: 텍스트는 입력값 또는 기본값
+        diniImg.src = diniSelect.value;
+        const text = diniText.value.trim() || PUBLIC_LETTERS.diniDefault;
+        diniPreviewText.textContent = text;
+      }
 
-  yoomPreviewText.textContent = PUBLIC_LETTERS.yoom;
-  diniPreviewText.textContent = PUBLIC_LETTERS.diniDefault;
+      function setupSelect(sel) {
+        sel.addEventListener("change", function() {
+          syncPreview();
+        });
+      }
+      setupSelect(yoomSelect);
+      setupSelect(diniSelect);
 
-  // ----------------------
-  // 미리보기 반영
-  // ----------------------
-  function syncPreview() {
-    yoomImg.src = yoomSelect.value;
-    diniImg.src = diniSelect.value;
-    diniPreviewText.textContent = diniText.value.trim() || PUBLIC_LETTERS.diniDefault;
-  }
+      if (diniText) {
+        diniText.addEventListener("input", function() {
+          syncPreview();
+        });
+      }
 
-  yoomSelect.addEventListener("change", syncPreview);
-  diniSelect.addEventListener("change", syncPreview);
-  diniText.addEventListener("input", syncPreview);
+      // 둥근 사각형 그리기 헬퍼
+      function drawRoundedRect(ctx, x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.lineTo(x + w - r, y);
+        ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+        ctx.lineTo(x + w, y + h - r);
+        ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+        ctx.lineTo(x + r, y + h);
+        ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+        ctx.lineTo(x, y + r);
+        ctx.quadraticCurveTo(x, y, x + r, y);
+        ctx.closePath();
+      }
 
-  // ----------------------
-  // 포토카드 저장 (라운드 카드 + 테두리)
-  // ----------------------
+      // 포토카드 이미지를 캔버스로 그려서 다운로드 (둥근 카드 + 테두리 + 웹 배경색)
+      function downloadCard(type) {
+        const canvas = document.createElement("canvas");
+        const width = 800;
+        const height = 1100;
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
 
-// 둥근 사각형 그리기 헬퍼
-function drawRoundedRect(ctx, x, y, w, h, r) {
-  ctx.beginPath();
-  ctx.moveTo(x + r, y);
-  ctx.lineTo(x + w - r, y);
-  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-  ctx.lineTo(x + w, y + h - r);
-  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-  ctx.lineTo(x + r, y + h);
-  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-  ctx.lineTo(x, y + r);
-  ctx.quadraticCurveTo(x, y, x + r, y);
-  ctx.closePath();
-}
+        const isYoom = type === "yoom";
+        const text = isYoom
+          ? PUBLIC_LETTERS.yoom
+          : (diniText.value.trim() || PUBLIC_LETTERS.diniDefault);
+        const imgSrc = isYoom ? yoomSelect.value : diniSelect.value;
+        const fileName = isYoom ? "To_Yoom_card.png" : "To_Dini_card.png";
 
-// 포토카드 이미지를 캔버스로 그려서 다운로드 (둥근 카드 + 테두리)
-function downloadCard(type) {
-  const canvas = document.createElement("canvas");
-  const width = 800;
-  const height = 1100; // 전체 이미지 크기
-  canvas.width = width;
-  canvas.height = height;
-  const ctx = canvas.getContext("2d");
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.onload = function() {
+          // 전체 배경: 웹과 동일한 연보라색
+          ctx.fillStyle = "#faf5ff";
+          ctx.fillRect(0, 0, width, height);
 
-  const isYoom = type === "yoom";
-  const text = isYoom
-    ? PUBLIC_LETTERS.yoom
-    : (diniText.value.trim() || PUBLIC_LETTERS.diniDefault);
-  const imgSrc = isYoom ? yoomSelect.value : diniSelect.value;
-  const fileName = isYoom ? "To_Yoom_card.png" : "To_Dini_card.png";
+          // 카드(둥근 사각형)
+          const cardMargin = 40;
+          const cardX = cardMargin;
+          const cardY = cardMargin;
+          const cardW = width - cardMargin * 2;
+          const cardH = height - cardMargin * 2;
+          const cardRadius = 40;
 
-  const img = new Image();
-  img.crossOrigin = "anonymous";
-  img.onload = function() {
-    // ===== 배경 =====
-    ctx.fillStyle = "#f5f3ff";      // 살짝 연보라 배경 (필요없으면 #ffffff)
-    ctx.fillRect(0, 0, width, height);
+          drawRoundedRect(ctx, cardX, cardY, cardW, cardH, cardRadius);
+          ctx.fillStyle = "#ffffff";
+          ctx.fill();
 
-    // ===== 카드(둥근 사각형) =====
-    const cardMargin = 40;
-    const cardX = cardMargin;
-    const cardY = cardMargin;
-    const cardW = width - cardMargin * 2;
-    const cardH = height - cardMargin * 2;
-    const cardRadius = 40;
+          ctx.lineWidth = 3;
+          ctx.strokeStyle = "#e5e7eb";
+          ctx.stroke();
 
-    // 카드 배경
-    drawRoundedRect(ctx, cardX, cardY, cardW, cardH, cardRadius);
-    ctx.fillStyle = "#ffffff";
-    ctx.fill();
+          // 카드 안 내용 영역
+          const padding = 40;
+          const contentX = cardX + padding;
+          const contentY = cardY + padding;
+          const contentW = cardW - padding * 2;
+          const maxPhotoHeight = cardH * 0.5;
 
-    // 카드 테두리
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = "#e5e7eb";
-    ctx.stroke();
+          // 사진 비율 유지
+          const imgRatio = img.width / img.height;
+          let drawWidth = contentW;
+          let drawHeight = drawWidth / imgRatio;
 
-    // ===== 카드 안 내용 영역 =====
-    const padding = 40;
-    const contentX = cardX + padding;
-    const contentY = cardY + padding;
-    const contentW = cardW - padding * 2;
-    const maxPhotoHeight = cardH * 0.5;  // 카드 높이의 절반 정도까지만 사진
+          if (drawHeight > maxPhotoHeight) {
+            drawHeight = maxPhotoHeight;
+            drawWidth = drawHeight * imgRatio;
+          }
 
-    // ==== 사진 비율 유지해서 그리기 ====
-    const imgRatio = img.width / img.height;
-    let drawWidth = contentW;
-    let drawHeight = drawWidth / imgRatio;
+          const offsetX = contentX + (contentW - drawWidth) / 2;
+          const offsetY = contentY;
 
-    if (drawHeight > maxPhotoHeight) {
-      drawHeight = maxPhotoHeight;
-      drawWidth = drawHeight * imgRatio;
-    }
+          ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
 
-    const offsetX = contentX + (contentW - drawWidth) / 2;
-    const offsetY = contentY;
+          // 텍스트 영역
+          const textAreaY = offsetY + drawHeight + 24;
+          const textAreaWidth = contentW;
 
-    ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+          ctx.fillStyle = "#111827";
+          ctx.font = "26px system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+          ctx.textBaseline = "top";
 
-    // ==== 텍스트 영역 ====
-    const textAreaY = offsetY + drawHeight + 24; // 사진과 텍스트 사이 여백
-    const textAreaWidth = contentW;
+          const lines = [];
+          const rawLines = text.split(/\r?\n/);
 
-    ctx.fillStyle = "#111827";
-    ctx.font = "26px system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
-    ctx.textBaseline = "top";
+          rawLines.forEach(function(line) {
+            const words = line.split(" ");
+            let current = "";
+            words.forEach(function(word) {
+              const test = current ? current + " " + word : word;
+              const w = ctx.measureText(test).width;
+              if (w > textAreaWidth) {
+                if (current) lines.push(current);
+                current = word;
+              } else {
+                current = test;
+              }
+            });
+            if (current) lines.push(current);
+          });
 
-    const lines = [];
-    const rawLines = text.split(/\r?\n/);
+          let y = textAreaY;
+          const lineHeight = 34;
+          lines.forEach(function(line) {
+            ctx.fillText(line, contentX, y);
+            y += lineHeight;
+          });
 
-    rawLines.forEach(function(line) {
-      const words = line.split(" ");
-      let current = "";
-      words.forEach(function(word) {
-        const test = current ? current + " " + word : word;
-        const w = ctx.measureText(test).width;
-        if (w > textAreaWidth) {
-          if (current) lines.push(current);
-          current = word;
-        } else {
-          current = test;
-        }
-      });
-      if (current) lines.push(current);
-    });
+          const link = document.createElement("a");
+          link.download = fileName;
+          link.href = canvas.toDataURL("image/png");
+          link.click();
 
-    let y = textAreaY;
-    const lineHeight = 34;
-    lines.forEach(function(line) {
-      ctx.fillText(line, contentX, y);
-      y += lineHeight;
-    });
+          showStatus("이미지가 열리면 길게 눌러서 '사진 저장'을 눌러줘 :)");
+        };
+        img.src = imgSrc;
+      }
 
-    const link = document.createElement("a");
-    link.download = fileName;
-    link.href = canvas.toDataURL("image/png");
-    link.click();
+      if (downloadYoomBtn) {
+        downloadYoomBtn.addEventListener("click", function() {
+          downloadCard("yoom");
+        });
+      }
+      if (downloadDiniBtn) {
+        downloadDiniBtn.addEventListener("click", function() {
+          downloadCard("dini");
+        });
+      }
 
-    // 아이폰용 안내 메시지
-    showStatus("이미지가 열리면 길게 눌러서 '사진 저장'을 눌러줘 :)");
-  };
-  img.src = imgSrc;
-}
-
-  function drawRoundedRect(ctx, x, y, w, h, r) {
-    ctx.beginPath();
-    ctx.moveTo(x + r, y);
-    ctx.lineTo(x + w - r, y);
-    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-    ctx.lineTo(x + w, y + h - r);
-    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-    ctx.lineTo(x + r, y + h);
-    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-    ctx.lineTo(x, y + r);
-    ctx.quadraticCurveTo(x, y, x + r, y);
-    ctx.closePath();
-  }
-
-  // 이벤트 연결
-  downloadYoomBtn.addEventListener("click", () => downloadCard("yoom"));
-  downloadDiniBtn.addEventListener("click", () => downloadCard("dini"));
-
-})();
-</script>
+      // 초기 미리보기
+      syncPreview();
+    })();
+  </script>
 </body>
 </html>
