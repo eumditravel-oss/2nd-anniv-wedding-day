@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>Our 2nd Anniversary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- 공유용 메타 -->
+  <meta name="description" content="우리의 결혼 2주년을 기념하는 작은 기록 페이지" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Our 2nd Anniversary" />
+  <meta property="og:description" content="함께 걸어온 730일, 그리고 앞으로의 시간들" />
+  <!-- 추후 필요하면 og:image 추가 (preview.png 등) -->
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #faf5ff;
+      color: #1f2933;
+      line-height: 1.6;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2.5rem 1.5rem 3.5rem;
+      background: radial-gradient(circle at top, #fdf2ff, #faf5ff);
+    }
+
+    .hero-title {
+      font-size: 2.4rem;
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-date {
+      font-size: 1rem;
+      color: #6b7280;
+      margin-bottom: 1rem;
+    }
+
+    .date-badge {
+      display: inline-block;
+      margin-top: 0.3rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      background: #ffffff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      font-size: 0.85rem;
+      color: #4b5563;
+    }
+
+    .hero-subtext {
+      margin-top: 1.2rem;
+      font-size: 0.95rem;
+      color: #4b5563;
+    }
+
+    /* 사진 3장 레이아웃 */
+    .hero-photos {
+      margin-top: 2.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .photo-card {
+      width: 140px;
+      max-width: 32vw;
+      background: #ffffff;
+      border-radius: 1.2rem;
+      padding: 0.6rem 0.6rem 0.8rem;
+      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.16);
+      position: relative;
+    }
+
+    .photo-card img {
+      width: 100%;
+      border-radius: 0.9rem;
+      object-fit: cover;
+      aspect-ratio: 3 / 4;
+      display: block;
+    }
+
+    .photo-caption {
+      margin-top: 0.4rem;
+      font-size: 0.7rem;
+      color: #6b7280;
+      text-align: center;
+    }
+
+    .photo-card:nth-child(1) {
+      transform: rotate(-5deg) translateY(4px);
+    }
+
+    .photo-card:nth-child(2) {
+      transform: translateY(-4px);
+      z-index: 2;
+    }
+
+    .photo-card:nth-child(3) {
+      transform: rotate(5deg) translateY(4px);
+    }
+
+    @media (min-width: 768px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+      .hero-subtext {
+        font-size: 1rem;
+      }
+      .photo-card {
+        width: 180px;
+      }
+    }
+
+    /* ===== 공통 섹션 ===== */
+    .section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #c084fc;
+      padding-left: 0.6rem;
+    }
+
+    /* 타임라인 */
+    .timeline {
+      border-left: 2px solid #e5e7eb;
+      padding-left: 1rem;
+      margin-left: 0.4rem;
+    }
+
+    .timeline-item {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -1.2rem;
+      top: 0.35rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #c084fc;
+    }
+
+    .timeline-date {
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    /* ===== 편지 섹션 ===== */
+    .letters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.7rem;
+      margin-top: 1.2rem;
+    }
+
+    .letter-card {
+      background: #ffffff;
+      border-radius: 1.2rem;
+      padding: 1.2rem 1.4rem 1.4rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .letter-card h3 {
+      margin: 0;
+      font-size: 1rem;
+      color: #7c3aed;
+    }
+
+    .letter-note {
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    textarea.letter-input {
+      width: 100%;
+      min-height: 140px;
+      resize: vertical;
+      border-radius: 0.75rem;
+      border: 1px solid #e5e7eb;
+      padding: 0.7rem 0.8rem;
+      font-family: inherit;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      outline: none;
+      background: #f9fafb;
+    }
+
+    textarea.letter-input:focus {
+      border-color: #c084fc;
+      background: #ffffff;
+      box-shadow: 0 0 0 1px rgba(192, 132, 252, 0.5);
+    }
+
+    .letters-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: flex-end;
+      margin-top: 0.6rem;
+    }
+
+    .btn {
+      border-radius: 999px;
+      border: none;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .btn-primary {
+      background: #8b5cf6;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.45);
+    }
+
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .save-status {
+      font-size: 0.78rem;
+      color: #9ca3af;
+      margin-top: 0.3rem;
+      text-align: right;
+    }
+
+    /* ===== 푸터 ===== */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem 2.5rem;
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 메인 히어로 -->
+  <section class="hero">
+    <div>
+      <h1 class="hero-title">Happy 2nd Anniversary</h1>
+      <div class="hero-date">2025.12.10</div>
+      <div class="date-badge">Since 2023.12.10 · 730 days together</div>
+      <p class="hero-subtext">
+        우리가 함께 보낸 모든 계절들을 기억하며,  
+        이 페이지에 오늘의 마음을 살짝 남겨두어요.
+      </p>
+    </div>
+
+    <!-- 사진 3장 카드 레이아웃 -->
+    <div class="hero-photos">
+      <!-- 이미지는 images 폴더에 넣고 파일명만 맞춰주세요 -->
+      <div class="photo-card">
+        <img src="images/photo1.jpg" alt="우리 사진 1" />
+        <div class="photo-caption">첫 해의 우리</div>
+      </div>
+      <div class="photo-card">
+        <img src="images/photo2.jpg" alt="우리 사진 2" />
+        <div class="photo-caption">함께한 여행 한 장면</div>
+      </div>
+      <div class="photo-card">
+        <img src="images/photo3.jpg" alt="우리 사진 3" />
+        <div class="photo-caption">요즘의 일상 속 우리</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 간단 타임라인 (원하면 나중에 수정/삭제 가능) -->
+  <section class="section">
+    <h2>우리의 작은 기록들</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">2023.12.10</div>
+        <div>우리가 부부가 된 날. 긴장과 설렘이 가득했던 결혼식 💍</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2024</div>
+        <div>첫 여행, 새로운 도전, 그리고 서로를 조금 더 이해하게 된 시간들</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2025</div>
+        <div>조금은 익숙해졌지만, 여전히 함께라서 든든한 우리의 두 번째 해</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2025.12.10</div>
+        <div>이 페이지를 함께 보며 웃고 있을 오늘의 우리</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 서로에게 쓰는 짧은 편지 (저장 기능 포함) -->
+  <section class="section">
+    <h2>서로에게 쓰는 짧은 편지</h2>
+    <p style="font-size:0.9rem; color:#6b7280; margin-bottom:0.8rem;">
+      여기 적은 편지는 이 브라우저 안에만 저장돼요.  
+      둘이서 같이 앉아서 한 번씩 적어보고, 내년에도 다시 열어보면 재밌을 거예요.
+    </p>
+
+    <div class="letters">
+      <!-- 왼쪽: 당신 편지 -->
+      <div class="letter-card">
+        <h3>To You</h3>
+        <div class="letter-note">당신에게 하고 싶은 말을 짧게 남겨보세요.</div>
+        <textarea id="letter-to-you" class="letter-input" placeholder="항상 고맙고, 앞으로도 잘 부탁해 😊"></textarea>
+      </div>
+
+      <!-- 오른쪽: 나의 편지 -->
+      <div class="letter-card">
+        <h3>From Me</h3>
+        <div class="letter-note">오늘의 나, 그리고 우리가 기억됐으면 하는 말들.</div>
+        <textarea id="letter-from-me" class="letter-input" placeholder="가끔은 서툴지만, 그래도 당신과 함께라서 행복해."></textarea>
+      </div>
+    </div>
+
+    <div class="letters-actions">
+      <button id="save-letters" class="btn btn-primary">
+        💾 편지 저장하기
+      </button>
+      <button id="reset-letters" class="btn btn-secondary">
+        ♻ 편지 비우기
+      </button>
+    </div>
+    <div id="save-status" class="save-status"></div>
+  </section>
+
+  <footer>
+    Made with ❤️ for our 2nd anniversary · GitHub Pages
+  </footer>
+
+  <script>
+    (function() {
+      const KEY_TO_YOU = "anniv_letter_to_you";
+      const KEY_FROM_ME = "anniv_letter_from_me";
+
+      const toYou = document.getElementById("letter-to-you");
+      const fromMe = document.getElementById("letter-from-me");
+      const saveBtn = document.getElementById("save-letters");
+      const resetBtn = document.getElementById("reset-letters");
+      const statusEl = document.getElementById("save-status");
+
+      function showStatus(message) {
+        if (!statusEl) return;
+        statusEl.textContent = message;
+        if (!message) return;
+        setTimeout(() => {
+          if (statusEl.textContent === message) {
+            statusEl.textContent = "";
+          }
+        }, 2500);
+      }
+
+      function loadLetters() {
+        try {
+          const savedTo = localStorage.getItem(KEY_TO_YOU);
+          const savedFrom = localStorage.getItem(KEY_FROM_ME);
+          if (savedTo !== null) toYou.value = savedTo;
+          if (savedFrom !== null) fromMe.value = savedFrom;
+          if (savedTo || savedFrom) {
+            showStatus("이전에 저장된 편지를 불러왔어요.");
+          }
+        } catch (e) {
+          console.warn("편지 로드 중 오류:", e);
+        }
+      }
+
+      function saveLetters() {
+        try {
+          localStorage.setItem(KEY_TO_YOU, toYou.value || "");
+          localStorage.setItem(KEY_FROM_ME, fromMe.value || "");
+          const now = new Date();
+          const timeText =
+            now.getHours().toString().padStart(2, "0") +
+            ":" +
+            now.getMinutes().toString().padStart(2, "0");
+          showStatus("편지를 저장했어요. (" + timeText + ")");
+        } catch (e) {
+          console.warn("편지 저장 중 오류:", e);
+          showStatus("저장에 문제가 생겼어요. (브라우저 설정을 확인해 주세요)");
+        }
+      }
+
+      function resetLetters() {
+        if (!confirm("정말 편지를 모두 비울까요? (이 브라우저에서만 삭제돼요)")) {
+          return;
+        }
+        try {
+          localStorage.removeItem(KEY_TO_YOU);
+          localStorage.removeItem(KEY_FROM_ME);
+        } catch (e) {
+          console.warn("편지 삭제 중 오류:", e);
+        }
+        toYou.value = "";
+        fromMe.value = "";
+        showStatus("편지를 모두 비웠어요.");
+      }
+
+      // 이벤트 연결
+      if (saveBtn) {
+        saveBtn.addEventListener("click", saveLetters);
+      }
+      if (resetBtn) {
+        resetBtn.addEventListener("click", resetLetters);
+      }
+
+      // 입력 중에도 자동 저장(부담안가게 조금 딜레이)
+      let typingTimer;
+      const AUTO_SAVE_DELAY = 1000;
+
+      function setupAutoSave(el) {
+        el.addEventListener("input", function() {
+          clearTimeout(typingTimer);
+          typingTimer = setTimeout(() => {
+            saveLetters();
+          }, AUTO_SAVE_DELAY);
+        });
+      }
+
+      setupAutoSave(toYou);
+      setupAutoSave(fromMe);
+
+      // 최초 로드 시 저장된 내용 불러오기
+      loadLetters();
+    })();
+  </script>
+</body>
+</html>
